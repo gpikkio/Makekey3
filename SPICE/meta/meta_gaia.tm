@@ -1,5 +1,5 @@
    \begindata
-        PATH_VALUES     = ('/home/cimo/SPACECRAFT/SPICE/Ordered/kernels')
+        PATH_VALUES     = ('SPICE/Ordered/kernels')
 	PATH_SYMBOLS    = ('KERNELS')
         KERNELS_TO_LOAD = (
                         '$KERNELS/lsk/naifLAST.tls'

@@ -1,7 +1,7 @@
-#!/usr/bin/python2
+#!/usr/bin/env python3
 
 import sys,os
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore, QtWidgets
 import MakeKeyClass
 
 class EmittingStream(QtCore.QObject):
@@ -12,7 +12,7 @@ class EmittingStream(QtCore.QObject):
         self.textWritten.emit(str(text))
 
 
-class Window(QtGui.QWidget):
+class Window(QtWidgets.QWidget):
     
     def __init__(self):
         super(Window, self).__init__()
@@ -29,7 +29,7 @@ class Window(QtGui.QWidget):
     def initUI(self):
         
         # Parser variable initialization
-        self.PI = 'Sergei'
+        self.PI = ''
         self.scantime = '20m'
         self.donwload_kernels = 'N'
         self.mid_scan = 'Y'
@@ -47,7 +47,7 @@ class Window(QtGui.QWidget):
             self.spacecraft = 'VEX'
             self.keyname = 'vex'+self.date1+'.key'
         else:
-            self.spacecraft = 'Unknown'
+            self.spacecraft = 'MEX'
             self.keyname = 'output.key'
         self.date1 = self.pwd[-4:]
         self.year= self.pwd[-10:-6]
@@ -59,41 +59,41 @@ class Window(QtGui.QWidget):
         self.move(500,10)
         
         # Two final buttons
-        self.okButton = QtGui.QPushButton("OK")
+        self.okButton = QtWidgets.QPushButton("OK")
         self.okButton.clicked.connect(self.returns)
-        cancelButton = QtGui.QPushButton("Exit")
+        cancelButton = QtWidgets.QPushButton("Exit")
         cancelButton.pressed.connect(self.buttonClicked)
 
         # Creating buttons, fields and drop-down menus
         #
-        self.comboSC = QtGui.QComboBox(self)
+        self.comboSC = QtWidgets.QComboBox(self)
         self.comboSC.addItem(self.spacecraft)
         self.comboSC.insertSeparator(1)
         self.comboSC.addItem("VEX")
         self.comboSC.addItem("MEX")
         self.comboSC.activated[str].connect(self.onActivated) 
         
-        self.label1 =  QtGui.QLabel('Choose spacecraft',self)
+        self.label1 =  QtWidgets.QLabel('Choose spacecraft',self)
 
-        self.comboPI = QtGui.QComboBox(self)
-        self.comboPI.addItem("Sergei")
-        self.comboPI.addItem("Giuseppe")
-        self.comboPI.addItem("Tatiana")
-        self.comboPI.addItem("Guifre")
+        self.comboPI = QtWidgets.QComboBox(self)
+        self.comboPI.addItem("PI1")
+        self.comboPI.addItem("PI2")
+        #self.comboPI.addItem("")
+        #self.comboPI.addItem("")
         self.comboPI.activated[str].connect(self.onActivated)
 
-        self.output= QtGui.QLineEdit(self.keyname,self)
+        self.output= QtWidgets.QLineEdit(self.keyname,self)
         self.output.textChanged.connect(self.onActivated)
 
-        self.time = QtGui.QLineEdit('20m',self)
+        self.time = QtWidgets.QLineEdit('20m',self)
         self.time.textChanged.connect(self.onActivated)
-        self.kernels = QtGui.QCheckBox('Update kernels', self)
+        self.kernels = QtWidgets.QCheckBox('Update kernels', self)
         self.kernels.stateChanged.connect(self.onActivated)
-        self.mid = QtGui.QCheckBox('Mid-scan coordinates', self)
+        self.mid = QtWidgets.QCheckBox('Mid-scan coordinates', self)
         self.mid.toggle()
         self.mid.stateChanged.connect(self.onActivated)
 
-        self.date = QtGui.QDateTimeEdit(self)
+        self.date = QtWidgets.QDateTimeEdit(self)
         self.date.setCalendarPopup(True)
         self.date0 = QtCore.QDateTime.fromString(self.date1+self.year,'MMddyyyy')
         self.date.setDateTime(QtCore.QDateTime(self.date0))
@@ -101,46 +101,42 @@ class Window(QtGui.QWidget):
         self.start_date = self.date.textFromDateTime(QtCore.QDateTime(self.date0))
         self.date.dateTimeChanged.connect(self.setdate)
 
-        self.date2 = QtGui.QDateTimeEdit(self)
+        self.date2 = QtWidgets.QDateTimeEdit(self)
         self.date2.setCalendarPopup(True)
         self.date2.setDateTime(QtCore.QDateTime(self.date0))
         self.date2.setDisplayFormat("dd/MM/yyyy hh:mm:ss")
         self.end_date = self.date2.textFromDateTime(QtCore.QDateTime(self.date0))
         self.date2.dateTimeChanged.connect(self.setdate2)
 
-        self.make_vex = QtGui.QCheckBox('Create vex file', self)
+        self.make_vex = QtWidgets.QCheckBox('Create vex file', self)
         self.do_vex = 'N'
         self.make_vex.toggled.connect(self.onToggle)
-        self.early_start = QtGui.QCheckBox('Start with gap for calibration', self)
+        self.early_start = QtWidgets.QCheckBox('Start with gap for calibration', self)
         self.early_start.toggled.connect(self.onToggle)
-        self.early_start_gap = QtGui.QLineEdit('5m',self)
+        self.early_start_gap = QtWidgets.QLineEdit('5m',self)
         self.early_start_gap.textChanged.connect(self.onActivated)
         self.early_start_gap.setReadOnly(True)
         
         self.station=[]
         self.stations=[]
-        self.stations_codes=['Mh','Wz','ONSALA60','ONSALA85','Mc','Ys',
-                        'Ma', 'Nt','Sh','Ur','KUNMING','Ww','Bd',
-                        'Ks','Ym', 'Hb','YEVPATORIA', 'Us', 'Pu',
-                        'Zc','Sv','Hh','Ht','Tm']
-        #self.stations_codes=['METSAHOV','WETTZELL','ONSALA60','ONSALA85','MEDICINA','YEBES40M',
-        #               'MATERA', 'NOTO','SHANGHAI','URUMUQI','KUNMING','WARKWORTH','BADARY',
-        #               'KASHIMA','YAMAGUCHI', 'HOBART12','YEVPATORIA', 'USSURIYSK', 'PUSHCHINO',
-        #               'ZELENCHK','SVETLOE','HARTRAO','HART15M','TIANMA65']
+        self.stations_codes=['Mh','Wz','On','Od','Mc','Ys',
+                             'Ma','Nt','Sh','Ur','Km','Ww',
+                             'Ks','Ym','Hh','Ye','Bd','Pu',
+                             'Ke','Yg','Hb','Ho','Cd','Bs']
         pos = [(0, 0), (0, 1), (0, 2), (0, 3),(0, 4), (0, 5), (0, 6), (0, 7),
                (1, 0), (1, 1), (1, 2), (1, 3),(1, 4), (1, 5), (1, 6), (1, 7),
                (2, 0), (2, 1), (2, 2), (2, 3),(2, 4), (2, 5), (2, 6), (2, 7)]
         j = 0
-        self.grid_stations = QtGui.QGridLayout()
+        self.grid_stations = QtWidgets.QGridLayout()
         for i in range(len(self.stations_codes)):
-            self.station.append(QtGui.QCheckBox(self.stations_codes[i], self))
+            self.station.append(QtWidgets.QCheckBox(self.stations_codes[i], self))
             self.grid_stations.addWidget(self.station[i], pos[j][0], pos[j][1])
             j = j + 1
         [self.station[k].stateChanged.connect(self.clickStation) for k in range(len(self.stations_codes))]
 
         # Arranging my buttons and fields into a grid
         #
-        self.grid = QtGui.QGridLayout()
+        self.grid = QtWidgets.QGridLayout()
         self.grid.setSpacing(10)
 
         self.grid.addWidget(self.comboSC,1,0)
@@ -151,33 +147,31 @@ class Window(QtGui.QWidget):
         self.grid.addWidget(self.time,2,0)
         self.grid.addWidget(self.kernels,2,1) 
         self.grid.addWidget(self.mid,2,2) 
-        self.grid.addWidget(QtGui.QLabel(''),2,3)
+        self.grid.addWidget(QtWidgets.QLabel(''),2,3)
         
-        self.grid.addWidget(QtGui.QLabel('From:'),4,0)
+        self.grid.addWidget(QtWidgets.QLabel('From:'),4,0)
         self.grid.addWidget(self.date,4,1)
-        self.grid.addWidget(QtGui.QLabel('To'),4,2)
+        self.grid.addWidget(QtWidgets.QLabel('To'),4,2)
         self.grid.addWidget(self.date2,4,3)
-        
-#
+
         self.grid.addWidget(self.make_vex,3,1)
-#
+
         self.grid.addWidget(self.early_start,3,2)
         self.grid.addWidget(self.early_start_gap,3,3)
         self.grid.addLayout(self.grid_stations,5,0,1,4)
-        self.box=QtGui.QTextEdit(self)
+        self.box=QtWidgets.QTextEdit(self)
         self.box.setReadOnly(True)
         self.grid.addWidget(self.box,6,0,6,4)
         
         # Creating 3 boxes where to put my grid and ok/cancel buttons
         #
-        hbox = QtGui.QHBoxLayout()
+        hbox = QtWidgets.QHBoxLayout()
         hbox.addStretch(1)
         hbox.addWidget(self.okButton)
         hbox.addWidget(cancelButton)
 
-        vbox = QtGui.QVBoxLayout()
+        vbox = QtWidgets.QVBoxLayout()
         vbox.addLayout(self.grid)
-#        vbox.addLayout(self.grid_stations)
         vbox.addLayout(hbox)
         
         self.setLayout(vbox)
@@ -222,7 +216,6 @@ class Window(QtGui.QWidget):
         self.keyname = self.output.displayText()
 
         self.out_file = self.keyname
-        #self.out_file = self.output.displayText()
 
         self.PI = self.comboPI.currentText()
             
@@ -246,7 +239,6 @@ class Window(QtGui.QWidget):
         self.stations=[]
         stat = [self.station[k].checkState() for k in range(len(self.stations_codes))]
         stations_dict=dict(zip(self.stations_codes,stat))
-        #        print stations_dict
 
         for key in stations_dict.keys():
             if stations_dict.get(key) == 2:
@@ -255,16 +247,16 @@ class Window(QtGui.QWidget):
     def returns(self):
         
         self.box.clear()
-        print '\nSummary (please check if correct):'
-        print '-------------------------------\n'
-        print 'PI:', self.PI 
-        print 'Satellite:', self.spacecraft
-        print 'Output file:', self.out_file
-        print 'Observations start:', self.start_date
-        print 'Observations end:', self.end_date
-        print 'Stations scheduled :', ', '.join(self.stations)
+        print('\nSummary (please check if correct):')
+        print('-------------------------------\n')
+        print( 'PI:', self.PI)
+        print( 'Satellite:', self.spacecraft)
+        print( 'Output file:', self.out_file)
+        print( 'Observations start:', self.start_date)
+        print( 'Observations end:', self.end_date)
+        print( 'Stations scheduled :', ', '.join(self.stations))
 
-        station_list = ', '.join(self.stations)
+        station_list = ", ".join(self.stations)
         MakeKeyClass.MakeCoordFunction(self.spacecraft, self.PI,self.out_file, self.scantime, self.donwload_kernels, \
                                        self.mid_scan, self.do_vex, self.start_date, self.end_date, self.initial_gap, \
                                        self.gap_start, station_list)
@@ -280,12 +272,11 @@ class Window(QtGui.QWidget):
         cursor.insertText(text)
         self.box.setTextCursor(cursor)
         self.box.ensureCursorVisible()
-#        self.box.append(text)
 
 
 def main():
     
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     
     Win = Window()
     
