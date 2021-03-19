@@ -1,5 +1,7 @@
 **********************************************************
 Scripts to create a .key file for spacecraft observations.
+Repository forked from bitbucket spacevlbi
+@gcimo
 **********************************************************
 
 MakeKey.py and the its GUI version GUI-MakeKey.py.
