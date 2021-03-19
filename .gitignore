@@ -1,0 +1,9 @@
+SPICE/
+__pycache__
+sched_files/keyfiles
+sched_files/vexfiles
+cspice/
+list.sources
+sources.coord
+summary.table
+sched.runlog

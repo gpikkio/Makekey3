@@ -1,5 +1,5 @@
    \begindata
-        PATH_VALUES     = ('/home/cimo/SPACECRAFT/SPICE/Ordered/kernels')
+        PATH_VALUES     = ('SPICE/kernels')
 	PATH_SYMBOLS    = ('KERNELS')
         KERNELS_TO_LOAD = (
                         '$KERNELS/lsk/naifLAST.tls'
@@ -20,17 +20,14 @@
                         '$KERNELS/spk/vlbistns_itrf93_russia_131122.bsp'     
                         '$KERNELS/spk/vlbistns_itrf93_southafrica_131127.bsp'
                         '$KERNELS/spk/MEX/ORMM_LAST_MEX.BSP'
-				        '$KERNELS/pck/DE403-MASSES.TPC'
-				        '$KERNELS/pck/pck00010.tpc'
+			'$KERNELS/pck/DE403-MASSES.TPC'
+			'$KERNELS/pck/pck00010.tpc'
                         '$KERNELS/pck/earth_070425_370426_predict.bpc'
                         '$KERNELS/pck/earth_LAST.bpc'
-           			)  
-
-   
-   \begintext
-                        
+           		)
+   \begintext                        
                         '$KERNELS/spk/MEX/ORMF_LAST.BSP'
                         '$KERNELS/spk/bodydef_venusplustroposphere.tm'
                         '$KERNELS/spk/MEX/ORMM__121201000000_00461.BSP'
-                        '$KERNELS/lsk/naif0010.tls'
+                        '$KERNELS/lsk/naif0012.tls'
                         '$KERNELS/pck/earth_000101_130306_121213.bpc'
