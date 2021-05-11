@@ -136,7 +136,7 @@ if args.a:
     satellite = "asteroid"
     gaps = "n"
     if args.S:
-        timestep, duration = steps("2m")
+        timestep, duration = steps("1m")
     if args.s:
         timestep, duration = steps(args.s)
 
@@ -265,7 +265,9 @@ if sat.lower() in (list_vex):
     gaps = "n"
 elif sat.lower() in (list_ast):
     #target = "2231937"
-    target = "-140947"
+    #target = "-140947"
+    #target = "54106739"
+    target = "54134663"
     if setup == "n":
         setup_file = keyfile_path + "Setups/asteroid.x"
     gaps = "n"

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os, re, sys
 import datetime
 import argparse

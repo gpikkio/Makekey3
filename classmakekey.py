@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 class MakeKey:
     #
     def __init__(self,pi={'piname':'Name','address1':'Address','phone':'Phone number','email':'email@some.where'},year='2017',month='05',day='10',sat='Mex',early_start='n',start_time='12:00:00',sources='',setup='n',setup_file='',stations='Mh',path=''):
