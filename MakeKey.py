@@ -134,6 +134,9 @@ if args.o:
 if args.a:
     # if argument is a then it means an asteroid
     satellite = "asteroid"
+    target = args.a
+    #target = "2231937"
+    #target = "-140947"
     gaps = "n"
     if args.S:
         timestep, duration = steps("1m")
@@ -350,8 +353,6 @@ h2, m2, s2 = date_str(ends)
 if scan_center == "y":
     m1 = int(float(m1) + float(timestep) / 120)
     m2 = int(float(m2) + float(timestep) / 120)
-    #m1 = str(m1)
-    #m2 = str(m2)
 
 utctime_ini = f'{year}-{month}-{day}T{h1}:{m1:02}:{s1}'
 utctime_end = f'{year2}-{month2}-{day2}T{h2}:{m2:02}:{s2}'
@@ -383,9 +384,7 @@ output = open(outname, "a")
 if coordname != "":
     filecoords = coordname
 else:
-    print(target)
-    filecoords = target.lower() + "_" + utctime_ini
-    print(filecoords)
+    filecoords = f'{target.lower()}_{utctime_ini}'
     filecoords = mods.pointing(meta_path, target, stations, utctime_ini, utctime_end, timestep, filecoords)
 
 # In Summary:
@@ -443,37 +442,11 @@ if (args.sumtb) and (sat.lower() in list_mex):
     startTime = f"{year}-{month}-{day} {start[0:5]}"
     stopTime = f"{year}-{month}-{day} {ends[0:5]}"
 
-    (
-        yy,
-        mm,
-        dd,
-        HH,
-        MM,
-        rah,
-        ram,
-        ras,
-        dech,
-        decm,
-        decs,
-        delta,
-        sot,
-        sto,
-    ) = handler.retrieve_jpleph(target, observer, startTime, stopTime)
+    (yy,mm,dd,HH,MM,rah,ram,ras,dech,decm,decs,delta,sot,sto) = handler.retrieve_jpleph(target, observer, startTime, stopTime)
     for ip in stat:
         f.write(
-            "|   0   | {}.{}.{} | {}-{} |  {}  | {}      |   NNO   | {} | {} | {}  | S      | Scint                 |\n".format(
-                year,
-                month,
-                day,
-                start[0:5],
-                ends[0:5],
-                outname[0:5],
-                ip,
-                sot,
-                sto,
-                delta,
-            )
-        )
+            "|   0   | {}.{}.{} | {}-{} |  {}  | {}      |   NNO   | {} | {} | {}  | S      | Scint                 |\n".format(year,month,day,start[0:5],ends[0:5],outname[0:5],ip,sot,sto,delta))
+    
     f.close()
 
 Schedule_File = MakeKey(

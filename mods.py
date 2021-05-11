@@ -17,7 +17,7 @@ def parsing():
     group.add_argument('-bc', help='Satellite is BEPICOLOMBO', action="store_true")
     group.add_argument('-j', help='Satellite is Juno', action="store_true")
     group.add_argument('-o', help='Satellite is M20', action="store_true")
-    group.add_argument('-a', help='Satellite is an asteroid', action="store_true")
+    group.add_argument('-a', dest="asteroid", help='Satellite is an asteroid', type="string")
 #    group2.add_argument('-M', help='\'mix\' setup single pol', action="store_true")
 #    group2.add_argument('-d', help='\'mix\' setup dual pol', action="store_true")
     parser.add_argument('--long', help='Experiment finishing another day', action="store_true")
@@ -82,7 +82,7 @@ def pointing(prog_dir,target,stations,ut_start,ut_end,steps,filecoords):
 
     stations_dict=dict(list(zip(stations_codes,stations_list)))
 
-    metakernel = prog_dir+'meta_'+target.lower()+'.tm'
+    metakernel = f'{prog_dir}meta_{target.lower()}.tm'
 
     separate_stations = re.split(r"\s*[,;]\s*", stations.strip())
 
@@ -204,7 +204,6 @@ def sched_ra(filename,dur):
             source = match.groups()[1]
             coord_ra = match.groups()[2]
             coord_dec = match.groups()[3]
-            #source_lines = 'source=\''+source+'\' '+coord_ra+' '+coord_dec+' equinox=\'j2000\' /\n'
             source_lines = f'source=\'{source}\' {coord_ra} {coord_dec} equinox=\'j2000\' /\n'
             f.write(source_lines)
             scans = f'source={source} {dur} /\n'
@@ -230,7 +229,6 @@ def sched_corr(filename,dur,sat):
             coord_ra = match.groups()[2]
             coord_dec = match.groups()[3]
             if coord_count==0:
-                #source_lines = 'source=\''+sat.upper()+'\' '+coord_ra+' '+coord_dec+' equinox=\'j2000\' /\n'
                 source_lines = f'source=\'{sat.upper()}\' {coord_ra} {coord_dec} equinox=\'j2000\' /\n'
                 f.write(source_lines)
                 coord_count=1
