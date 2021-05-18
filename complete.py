@@ -2,8 +2,8 @@
 
 import os, readline
 
-class Completer(object):
 
+class Completer(object):
     def _listdir(self, root):
         "List directory 'root' appending the path separator to subdirs."
         res = []
@@ -20,8 +20,7 @@ class Completer(object):
             return self._listdir('.')
         dirname, rest = os.path.split(path)
         tmp = dirname if dirname else '.'
-        res = [os.path.join(dirname, p)
-                for p in self._listdir(tmp) if p.startswith(rest)]
+        res = [os.path.join(dirname, p) for p in self._listdir(tmp) if p.startswith(rest)]
         # more than one match, or single match which does not exist (typo)
         if len(res) > 1 or not os.path.exists(path):
             return res
@@ -30,6 +29,7 @@ class Completer(object):
             return [os.path.join(path, p) for p in self._listdir(path)]
         # exact file match terminates this completion
         return [path + ' ']
+
 
 # we want to treat '/' as part of a word, so override the delimiters
 readline.set_completer_delims(' \t\n;')
