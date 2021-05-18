@@ -20,16 +20,19 @@ def signal_handler(signal, frame):
     print("\n\n\tYou presssed Ctrl+C! Bye!\n")
     sys.exit(0)
 
+
 signal.signal(signal.SIGINT, signal_handler)
 
 # slices a date string of form dd/mm/yyyy
 def date_str(s):
     return s[0:2], s[3:5], s[6:10]
 
+
 #############################
 # PATH definition and checks.
 #
 kernel_path, meta_path, keyfile_path = mods.paths()
+
 
 def path_check(paths):
     check_note = "Please define the env variable $MAKEKEY."
@@ -37,13 +40,11 @@ def path_check(paths):
         print(f"\n\tPath {paths} not found.\n\t{check_note}\n")
         sys.exit(0)
 
+
 for paths in kernel_path, meta_path, keyfile_path:
     path_check(paths)
 
-pis = {
-    "pi1": {"piname": "Name1", "phone": "Phone1", "email": "Email1"},
-    "pi2": {"piname": "Name2", "phone": "Phone2", "email": "Email2"},
-}
+pis = {"pi1": {"piname": "Name1", "phone": "Phone1", "email": "Email1"}, "pi2": {"piname": "Name2", "phone": "Phone2", "email": "Email2"}}
 
 # command line options and initialization
 #
@@ -107,7 +108,7 @@ if args.g:
     if args.s:
         timestep, duration = steps(args.s)
 
-if args.bc:
+if args.b:
     satellite = "BC_MPO"
     gaps = "n"
     if args.S:
@@ -135,8 +136,8 @@ if args.a:
     # if argument is a then it means an asteroid
     satellite = "asteroid"
     target = args.a
-    #target = "2231937"
-    #target = "-140947"
+    # target = "2231937"
+    # target = "-140947"
     gaps = "n"
     if args.S:
         timestep, duration = steps("1m")
@@ -200,7 +201,7 @@ list_vex = ["v", "vex"]
 list_mex = ["m", "mex"]
 list_ra = ["r", "ra", "radioastron"]
 list_gaia = ["g", "gaia"]
-list_mpo = ["bc", "mpo", "bc_mpo"]
+list_mpo = ["b", "bc", "mpo", "bc_mpo"]
 list_juno = ["j", "juno"]
 list_m20 = ["o", "perseverance"]
 list_ast = ["a", "asteroid"]
@@ -255,49 +256,47 @@ else:
 if satellite != "":
     sat = satellite
 else:
-    sat = input(
-        "VenusExpress, MarsExpress, RadioAstron, Gaia, Juno or BepiColombo? (Mex/Vex/Ra/Gaia/Mpo/M20) --> "
-    )
+    sat = input("VenusExpress, MarsExpress, RadioAstron, Gaia, Juno or BepiColombo? (Mex/Vex/Ra/Gaia/Mpo/M20) --> ")
 
-filename = keyfile_path + "keyfiles/default.key"
+filename = f'{keyfile_path}keyfiles/default.key'
 
 if sat.lower() in (list_vex):
     target = "VEX"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/vex.x"
+        setup_file = f'{keyfile_path}Setups/vex.x'
     gaps = "n"
 elif sat.lower() in (list_ast):
-    #target = "2231937"
-    #target = "-140947"
-    #target = "54106739"
+    # target = "2231937"
+    # target = "-140947"
+    # target = "54106739"
     target = "54134663"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/asteroid.x"
+        setup_file = f'{keyfile_path}Setups/asteroid.x'
     gaps = "n"
 elif sat.lower() in (list_mpo):
     target = "MPO"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/bepicolombo.x"
+        setup_file = f'{keyfile_path}Setups/bc_mpo.x'
     gaps = "n"
 elif sat.lower() in (list_m20):
     target = "Perseverance"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/mex.x"
+        setup_file = f'{keyfile_path}Setups/mex.x'
     gaps = "n"
 elif sat.lower() in (list_juno):
     target = "Juno"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/juno.x"
+        setup_file = f'{keyfile_path}Setups/juno.x'
     gaps = "n"
 elif sat.lower() in (list_mex):
     target = "MEX"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/mex.x"
+        setup_file = f'{keyfile_path}Setups/mex.x'
     gaps = "n"
 elif sat.lower() in (list_ra):
     target = "RADIOASTRON"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/ra.x"
+        setup_file = f'{keyfile_path}Setups/ra.x'
     if gaps != "y":
         while True:
             gaps = input("Should I add gaps in scan list? (y/N): ")
@@ -312,7 +311,7 @@ elif sat.lower() in (list_ra):
 elif sat.lower() in (list_gaia):
     target = "GAIA"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/gaia.x"
+        setup_file = f'{keyfile_path}Setups/gaia.x'
     gaps = "n"
 if outfile != "":
     outname = outfile
@@ -442,27 +441,13 @@ if (args.sumtb) and (sat.lower() in list_mex):
     startTime = f"{year}-{month}-{day} {start[0:5]}"
     stopTime = f"{year}-{month}-{day} {ends[0:5]}"
 
-    (yy,mm,dd,HH,MM,rah,ram,ras,dech,decm,decs,delta,sot,sto) = handler.retrieve_jpleph(target, observer, startTime, stopTime)
+    (yy, mm, dd, HH, MM, rah, ram, ras, dech, decm, decs, delta, sot, sto) = handler.retrieve_jpleph(target, observer, startTime, stopTime)
     for ip in stat:
-        f.write(
-            "|   0   | {}.{}.{} | {}-{} |  {}  | {}      |   NNO   | {} | {} | {}  | S      | Scint                 |\n".format(year,month,day,start[0:5],ends[0:5],outname[0:5],ip,sot,sto,delta))
-    
+        f.write("|   0   | {}.{}.{} | {}-{} |  {}  | {}      |   NNO   | {} | {} | {}  | S      | Scint                 |\n".format(year, month, day, start[0:5], ends[0:5], outname[0:5], ip, sot, sto, delta))
+
     f.close()
 
-Schedule_File = MakeKey(
-    pis.get(pi),
-    year,
-    month,
-    day,
-    sat,
-    early_start,
-    start,
-    source_file,
-    setup,
-    setup_file,
-    stations,
-    keyfile_path,
-)
+Schedule_File = MakeKey(pis.get(pi), year, month, day, sat, early_start, start, source_file, setup, setup_file, stations, keyfile_path)
 for line in open(filename):
     lines = line
     for r in Schedule_File.list_checks:
