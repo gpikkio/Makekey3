@@ -17,7 +17,7 @@ def parsing():
     group.add_argument('-bc', help='Satellite is BEPICOLOMBO', action="store_true")
     group.add_argument('-j', help='Satellite is Juno', action="store_true")
     group.add_argument('-o', help='Satellite is M20', action="store_true")
-    group.add_argument('-a', dest="asteroid", help='Satellite is an asteroid', type="string")
+    group.add_argument('-a', help='Satellite is an asteroid', action="store_true")
 #    group2.add_argument('-M', help='\'mix\' setup single pol', action="store_true")
 #    group2.add_argument('-d', help='\'mix\' setup dual pol', action="store_true")
     parser.add_argument('--long', help='Experiment finishing another day', action="store_true")

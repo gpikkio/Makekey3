@@ -107,7 +107,7 @@ if args.g:
     if args.s:
         timestep, duration = steps(args.s)
 
-if args.bc:
+if args.b:
     satellite = "BC_MPO"
     gaps = "n"
     if args.S:
@@ -200,7 +200,7 @@ list_vex = ["v", "vex"]
 list_mex = ["m", "mex"]
 list_ra = ["r", "ra", "radioastron"]
 list_gaia = ["g", "gaia"]
-list_mpo = ["bc", "mpo", "bc_mpo"]
+list_mpo = ["b", "bc", "mpo", "bc_mpo"]
 list_juno = ["j", "juno"]
 list_m20 = ["o", "perseverance"]
 list_ast = ["a", "asteroid"]
@@ -259,12 +259,12 @@ else:
         "VenusExpress, MarsExpress, RadioAstron, Gaia, Juno or BepiColombo? (Mex/Vex/Ra/Gaia/Mpo/M20) --> "
     )
 
-filename = keyfile_path + "keyfiles/default.key"
+filename = f'{keyfile_path}keyfiles/default.key'
 
 if sat.lower() in (list_vex):
     target = "VEX"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/vex.x"
+        setup_file = f'{keyfile_path}Setups/vex.x'
     gaps = "n"
 elif sat.lower() in (list_ast):
     #target = "2231937"
@@ -272,32 +272,32 @@ elif sat.lower() in (list_ast):
     #target = "54106739"
     target = "54134663"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/asteroid.x"
+        setup_file = f'{keyfile_path}Setups/asteroid.x'
     gaps = "n"
 elif sat.lower() in (list_mpo):
     target = "MPO"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/bepicolombo.x"
+        setup_file = f'{keyfile_path}Setups/bc_mpo.x'
     gaps = "n"
 elif sat.lower() in (list_m20):
     target = "Perseverance"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/mex.x"
+        setup_file = f'{keyfile_path}Setups/mex.x'
     gaps = "n"
 elif sat.lower() in (list_juno):
     target = "Juno"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/juno.x"
+        setup_file = f'{keyfile_path}Setups/juno.x'
     gaps = "n"
 elif sat.lower() in (list_mex):
     target = "MEX"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/mex.x"
+        setup_file = f'{keyfile_path}Setups/mex.x'
     gaps = "n"
 elif sat.lower() in (list_ra):
     target = "RADIOASTRON"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/ra.x"
+        setup_file = f'{keyfile_path}Setups/ra.x'
     if gaps != "y":
         while True:
             gaps = input("Should I add gaps in scan list? (y/N): ")
@@ -312,7 +312,7 @@ elif sat.lower() in (list_ra):
 elif sat.lower() in (list_gaia):
     target = "GAIA"
     if setup == "n":
-        setup_file = keyfile_path + "Setups/gaia.x"
+        setup_file = f'{keyfile_path}Setups/gaia.x'
     gaps = "n"
 if outfile != "":
     outname = outfile
