@@ -78,9 +78,10 @@ class MakeKey:
             insert = f'{self.sources}'
         if text == 'exp':
             if self.sat.lower()[0] in self.list_sat:
-                insert = self.sat.lower()[0] + self.month + self.day + '\''
+                insert = f'{self.sat.lower()[0]}{self.month}{self.day}\''
+                #insert = self.sat.lower()[0] + self.month + self.day + '\''
             else:
-                insert = 'x' + self.month + self.day + '\''
+                insert = f'x{self.month}{self.day}\''
         if text == 'setup':
             if self.setup == 'y':
                 insert = self.setup_file

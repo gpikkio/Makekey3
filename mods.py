@@ -12,7 +12,7 @@ def parsing():
     group.add_argument('-v', help='Satellite is Vex', action="store_true")
     group.add_argument('-m', help='Satellite is Mex', action="store_true")
     group.add_argument('-g', help='Satellite is Gaia', action="store_true")
-    group.add_argument('-bc', help='Satellite is BEPICOLOMBO', action="store_true")
+    group.add_argument('-b', help='Satellite is BEPICOLOMBO', action="store_true")
     group.add_argument('-j', help='Satellite is Juno', action="store_true")
     group.add_argument('-o', help='Satellite is M20', action="store_true")
     group.add_argument('-a', help='Satellite is an asteroid', action="store_true")
