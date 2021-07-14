@@ -2,6 +2,7 @@ SPICE/
 __pycache__
 sched_files/keyfiles
 sched_files/vexfiles
+sched_files/coords
 cspice/
 list.sources
 sources.coord
