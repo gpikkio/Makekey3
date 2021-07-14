@@ -19,18 +19,12 @@
 			'$KERNELS/spk/vlbistns_itrf93_oceania_131127.bsp'    
                         '$KERNELS/spk/vlbistns_itrf93_russia_131122.bsp'     
                         '$KERNELS/spk/vlbistns_itrf93_southafrica_131127.bsp'
-                        '$KERNELS/spk/Juno/spk_pre_200625_201230_200914_btm29_f.bsp'
-				        '$KERNELS/pck/DE403-MASSES.TPC'
-				        '$KERNELS/pck/pck00010.tpc'
+                        '$KERNELS/spk/Juno/spk_ref_210111_251021_210111.bsp'
+		        '$KERNELS/pck/DE403-MASSES.TPC'
+		        '$KERNELS/pck/pck00010.tpc'
                         '$KERNELS/pck/earth_070425_370426_predict.bpc'
                         '$KERNELS/pck/earth_LAST.bpc'
-           			)  
-
-   
+           		)
    \begintext
-                        
-                        '$KERNELS/spk/MPO/bc_mpo_struct_v05.bsp'
-                        '$KERNELS/spk/bodydef_venusplustroposphere.tm'
-                        '$KERNELS/spk/Juno/spk_pre_200625_201230_200914_btm29_f.bsp.lbl.txt'
                         '$KERNELS/lsk/naif0010.tls'
                         '$KERNELS/pck/earth_000101_130306_121213.bpc'
