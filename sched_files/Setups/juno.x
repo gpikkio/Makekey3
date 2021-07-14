@@ -1,7 +1,7 @@
 nchan    = 4
 bits     = 2
 bbfilter = 8
-freqref  = 8407.00,8415.00,8423.00,8431.00
+freqref  = 8400.00,8408.00,8416.00,8424.00
 pol      = RCP
 netside  = U
 pcal     = off
@@ -23,7 +23,7 @@ barrel   = roll_off /
    bbc = 1,2,3,4
    format   = VDIF station  = WARK /
 !--------------------------------------------------------------------------
-   firstlo=8800,8800,8800,8800
+   firstlo=9040,9040,9040,9040
    ifchan='A1','A1','A1','A1'
    bbc = 1,2,3,4
    station = CEDUNA format = VDIF /
@@ -34,8 +34,8 @@ barrel   = roll_off /
    station = HOBART12 format = VDIF /
 !--------------------------------------------------------------------------
    firstlo=8800,8800,8800,8800
-   ifchan='2N','2N','2N','2N'
-   bbc= 1,3,5,7
+   ifchan='A3','A3','A3','A3'
+   bbc= 1,2,3,4
    station=HOBART26 format = VDIF /
 !--------------------------------------------------------------------------
    firstlo=7600,7600,7600,7600
