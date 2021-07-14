@@ -167,7 +167,7 @@ def pointing(prog_dir, target, stations, ut_start, ut_end, steps, filecoords):
             # --------------------------------------------------------------------------
 
             source = timesUTC[11:13] + timesUTC[14:16] + timesUTC[17:19]
-            f.write(f'source=\'{source}\' ra={ra_ST_STRING} dec={dec_ST_STRING} equinox=\'j2000\' /\n')
+            f.write(f"source=\'{source}\' ra={ra_ST_STRING} dec={dec_ST_STRING} equinox=\'j2000\' /\n")
 
             et = et + steps
 
@@ -346,10 +346,10 @@ def scans_corr(sat, scan_length):
         if match:
             t = match.groups()[0]
             if t == start_time:
-                lines = 'gap=1:00 ' + 'source=' + sat.upper() + ' dur=' + str(scan_length) + ':00 /\n'
+                lines = f'gap=1:00 source={sat.upper()} dur={scan_length}:00 /\n'
                 scans.write(lines)
             if t == gap2 and t != last_time:
-                lines = 'gap=1:00 ' + 'source=' + sat.upper() + ' dur=' + str(scan_length) + ':00 /\n'
+                lines = f'gap=1:00 source={sat.upper()} dur={scan_length}:00 /\n'
                 tgap = tgap2 + datetime.timedelta(minutes=scan_length)
                 tgap2 = tgap2 + datetime.timedelta(minutes=scan_length + gap_time)
                 gap, gap2, gap0 = time_gap(str(len(start_time)))

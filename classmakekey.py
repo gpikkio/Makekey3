@@ -15,7 +15,7 @@ class MakeKey:
         self.year = year
         self.month = month
         self.day = day
-        self.list_sat = ['v', 'm', 'r', 'g', 'o', 'b', 'a']
+        self.list_sat = ['v', 'm', 'r', 'g', 'o', 'b', 'a', 'j']
         self.sat = sat
         self.stations = stations
         self.early_start = early_start
