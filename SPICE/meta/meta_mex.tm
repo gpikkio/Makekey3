@@ -27,7 +27,6 @@
            		)
    \begintext                        
                         '$KERNELS/spk/MEX/ORMF_LAST.BSP'
-                        '$KERNELS/spk/bodydef_venusplustroposphere.tm'
                         '$KERNELS/spk/MEX/ORMM__121201000000_00461.BSP'
                         '$KERNELS/lsk/naif0012.tls'
                         '$KERNELS/pck/earth_000101_130306_121213.bpc'
