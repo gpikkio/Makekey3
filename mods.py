@@ -166,7 +166,7 @@ def pointing(prog_dir, target, stations, ut_start, ut_end, steps, filecoords):
             # Print output file
             # --------------------------------------------------------------------------
 
-            source = timesUTC[11:13] + timesUTC[14:16] + timesUTC[17:19]
+            source: str = f'{timesUTC[11:13]}{timesUTC[14:16]}{timesUTC[17:19]}'
             f.write(f"source=\'{source}\' ra={ra_ST_STRING} dec={dec_ST_STRING} equinox=\'j2000\' /\n")
 
             et = et + steps
@@ -207,7 +207,7 @@ def sched_ra(filename, dur):
             coord_dec = match.groups()[3]
             source_lines = f'source=\'{source}\' {coord_ra} {coord_dec} equinox=\'j2000\' /\n'
             f.write(source_lines)
-            scans = f'source={source} {dur} /\n'
+            scans = f"source=\'{source}\' {dur} /\n"
             scan.write(scans)
 
     return outfile
