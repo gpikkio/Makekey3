@@ -12,8 +12,7 @@ They require:
 
 - an environment variable $MAKEKEY
 - the python module "ephem";
-- spiceypy or 
-  the NAIF SPICE toolkit + the python module "PySPICE".
+- spiceypy
 
 ...and, of course, SCHED is needed for producing creating a .vex file
 out of the .key file. SCHED can be downloaded from:
