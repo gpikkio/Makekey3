@@ -12,7 +12,8 @@ They require:
 
 - an environment variable $MAKEKEY
 - the python module "ephem";
-- the NAIF SPICE toolkit + the python module "PySPICE".
+- spiceypy or 
+  the NAIF SPICE toolkit + the python module "PySPICE".
 
 ...and, of course, SCHED is needed for producing creating a .vex file
 out of the .key file. SCHED can be downloaded from:
@@ -54,30 +55,12 @@ use the pip command, like this:
 
 $ pip install pyephem
 
-
 -------
-CSPICE:
+SPICEYPY
 -------
 
-The first step is to get the cspice toolkit:
-
-http://naif.jpl.nasa.gov/naif/toolkit_C.html
-
-Download the cspice toolkit and extract it to the directory
-"cspice".
-
-In the directory where the folder cspice is, download and
-extract the PySPICE files:
- 
-https://github.com/rca/PySPICE
-
-Then, run setup.py like so:
-
-$ python setup.py build_ext
-
-Then install:
-
-$ python setup.py install
+The Python package spiceypy
+$ pip install spiceypy
 
 
 -----------------------
