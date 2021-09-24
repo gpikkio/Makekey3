@@ -16,8 +16,6 @@ def parsing():
     group.add_argument('-j', help='Satellite is Juno', action="store_true")
     group.add_argument('-o', help='Satellite is M20', action="store_true")
     group.add_argument('-a', help='Satellite is an asteroid', action="store_true")
-#    group2.add_argument('-M', help='\'mix\' setup single pol', action="store_true")
-#    group2.add_argument('-d', help='\'mix\' setup dual pol', action="store_true")
     parser.add_argument('--long', help='Experiment finishing another day', action="store_true")
     parser.add_argument('--nogap', help='No gap for RA observations', action="store_true")
     parser.add_argument('-k', '--kernels', help='Download SPICE kernels for VEX or MEX, Leap Second and EOP.', action="store_true")
@@ -71,10 +69,10 @@ def pointing(prog_dir, target, stations, ut_start, ut_end, steps, filecoords):
 
     stations_list = [
         x.lower()
-        for x in ['METSAHOV', 'WETTZELL', 'ONSALA60', 'ONSALA85', 'MEDICINA', 'YEBES40M', 'MATERA', 'NOTO', 'SHANGHAI', 'URUMUQI', 'KUNMING', 'WARKWORTH', 'KASHIMA', 'YAMAGUCHI', 'HARTEESB', 'YEVPATORIA', 'BADARY', 'PUSHCHINO', 'KATHERIN', 'YARRAGAD', 'HOBART12', 'HOBART26', 'CEDUNA', 'BISDEE']
+        for x in ['METSAHOV', 'WETTZELL', 'ONSALA60', 'ONSALA85', 'MEDICINA', 'YEBES40M', 'MATERA', 'NOTO', 'SHANGHAI', 'URUMUQI', 'KUNMING', 'WARKWORTH', 'KASHIMA', 'YAMAGUCHI', 'HARTRAO', 'YEVPATORIA', 'BADARY', 'PUSHCHINO', 'KATHERIN', 'YARRAGAD', 'HOBART12', 'HOBART26', 'CEDUNA', 'BISDEE', 'MOPRA']
     ]
 
-    stations_codes = [x.lower() for x in ['Mh', 'Wz', 'On', 'Od', 'Mc', 'Ys', 'Ma', 'Nt', 'Sh', 'Ur', 'Km', 'Ww', 'Ks', 'Ym', 'Hh', 'Ye', 'Bd', 'Pu', 'Ke', 'Yg', 'Hb', 'Ho', 'Cd', 'Bs']]
+    stations_codes = [x.lower() for x in ['Mh', 'Wz', 'On', 'Od', 'Mc', 'Ys', 'Ma', 'Nt', 'Sh', 'Ur', 'Km', 'Ww', 'Ks', 'Ym', 'Hh', 'Ye', 'Bd', 'Pu', 'Ke', 'Yg', 'Hb', 'Ho', 'Cd', 'Bs', 'Mp']]
 
     stations_dict = dict(list(zip(stations_codes, stations_list)))
 

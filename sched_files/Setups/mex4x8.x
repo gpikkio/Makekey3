@@ -1,7 +1,7 @@
 nchan    = 4
 bits     = 2
 bbfilter = 8
-freqref  = 8407.00,8415.00,8423.00,8431.00
+freqref  = 8403.00,8415.00,8425.00,8433.00
 pol      = RCP
 netside  = U
 pcal     = off
@@ -89,10 +89,8 @@ barrel   = roll_off /
    station=KVNUS /
 !--------------------------------------------------------------------------
 !
-   ifchan=''
    firstlo=8080,8080,8080,8080
-   m4patch = 'geo1'
-   ifchan='3O','3O','3O','3O'
-   bbc=   5,   6,   7,   8
-   format = mkiv1:4 station  = WETTZELL /
+   ifchan= A, A, A, A
+   bbc=    1, 2, 3, 4
+   format = VDIF station  = WETTZELL /
 !--------------------------------------------------------------------------
