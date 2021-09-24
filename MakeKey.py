@@ -171,7 +171,7 @@ if args.corr:
 
 # Scan length for correlating RA observations
 # default 1 minute gap every 19 minutes.
-scan_length = "19"
+scan_length = "20"
 if args.scan:
     scan_length = args.scan
 
@@ -443,7 +443,7 @@ if (args.sumtb) and (sat.lower() in list_mex):
 
     (yy, mm, dd, HH, MM, rah, ram, ras, dech, decm, decs, delta, sot, sto) = handler.retrieve_jpleph(target, observer, startTime, stopTime)
     for ip in stat:
-        f.write("|   0   | {}.{}.{} | {}-{} |  {}  | {}      |   NNO   | {} | {} | {}  | S      | Scint                 |\n".format(year, month, day, start[0:5], ends[0:5], outname[0:5], ip, sot, sto, delta))
+        f.write("|   0 | {}.{}.{} | {}-{} |  {}  | {}      | NNO | {} | {} | {} | S      | Scint                 |\n".format(year, month, day, start[0:5], ends[0:5], outname[0:5], ip, sot, sto, delta))
 
     f.close()
 
