@@ -460,61 +460,62 @@ def getKernels(kernel_dir, satellite):
     date: str = f'{year}{month}'
 
     satellite: str = satellite.upper()
-
+        
     spk_dir: str = f'{kernel_dir}spk/{satellite}/'
     lsk_dir: str = f'{kernel_dir}lsk/'
     pck_dir: str = f'{kernel_dir}pck/'
 
-    url: str = f'http://naif.jpl.nasa.gov/'
-    url1: str = f'ftp://spiftp.esac.esa.int/data/SPICE/'
-    path: str = f'pub/naif/{satellite}/kernels/spk/'
-    filename: str = f'OR{satellite[0]*2}__{date}'
+    url0 = 'http://naif.jpl.nasa.gov/pub/naif/'+satellite+'/kernels/'
+    url1: str = f'http://spiftp.esac.esa.int/data/SPICE/'
 
-    if satellite == "BC_MPO":
-        u = urllib.request.urlopen(f'{url1}BEPICOLOMBO/')
-        response = urllib.request.urlopen(url1).read().decode('utf-8')
+    path='spk/'
+    if satellite == 'M20':
+        url=url0
+        print('\n-k opion not available (yet!)\nDOWNLOAD THE PROPER KERNELS MANUALLY!!!\n')
+        quit()
+    elif satellite == 'BC_MPO':
+        url=url1
+        print('\n-k otion not available (yet!)\nDOWNLOAD THE PROPER KERNELS MANUALLY!!!\n')
+        quit()
     else:
-        u = urllib.request.urlopen(f'{url}{path}')
-        response = urllib.request.urlopen(url).read().decode('utf-8')
+        url = url0
+        filename: str = f'OR{satellite[0]*2}__{date}'
 
-    response_re = re.compile('.*\>(%s.*BSP)\<.*' % filename)
+    response = urllib.request.urlopen(f'{url}{path}').read().decode('utf-8')
+    response_re = re.compile('.*(%s.*BSP)' % filename)
     for files in response_re.findall(response):
         dest_file = f'{spk_dir}{files}'
-        print(f'{dest_file}')
         if os.path.exists(dest_file):
-            print(f'{satellite} SPICE Kernel Already Exists!')
+            print(f'\n{satellite} SPICE Kernel Already Exists!')
         else:
             os.system('wget %s --directory-prefix=%s' % (url + path + files, spk_dir))
             os.system("rm -rf {0}OR".format(spk_dir) + satellite[0] * 2 + "_LAST_{0}.BSP".format(satellite))
             os.system("ln -s {0} {1}OR".format(dest_file, spk_dir) + satellite[0] * 2 + "_LAST_{0}.BSP".format(satellite))
             print(f"Created symlink: {spk_dir}OR" + satellite[0] * 2 + "_LAST_{satellite}.BSP\n")
 
-    path1 = f'pub/naif/{satellite}/kernels/lsk/'
+    path1 = f'lsk/'
     filename = 'NAIF'
-    if satellite == "BC_MPO":
-        response = urllib.request.urlopen(f'{url1}BEPICOLOMBO/kernels/lsk/').read().decode('utf-8')
-    else:
-        response = urllib.request.urlopen(f'{url}{path1}').read().decode('utf-8')
+    response = urllib.request.urlopen(f'{url}{path1}').read().decode('utf-8')
 
     response_re = re.compile('.*\>(%s.*TLS)\<.*' % filename)
     for files in response_re.findall(response):
         dest_file = lsk_dir + str(files)
         if os.path.exists(dest_file):
-            print('Leap Second Kernel Already Exists!')
+            print('\nLeap Second Kernel Already Exists!')
         else:
             os.system('wget %s --directory-prefix=%s' % (url + path1 + files, lsk_dir))
             os.system('rm -rf %snaifLAST.tls' % lsk_dir)
             os.system('ln -s %s %snaifLAST.tls' % (dest_file, lsk_dir))
             print('Created symlink: %snaifLAST.tls\n' % lsk_dir)
 
-    path2 = "pub/naif/generic_kernels/pck/"
-    filename = 'earth_000101'
-    response = urllib.request.urlopen(url + path2).read().decode('utf-8')
-    response_re = re.compile('.*\>(%s.*bpc)\<.*' % filename)
+    path2 = "pck/"
+    filename = 'EARTH'
+    response = urllib.request.urlopen(f'{url}{path2}').read().decode('utf-8')
+    response_re = re.compile('.*(%s.*BPC)' % filename)
     for files in response_re.findall(response):
         dest_file = pck_dir + str(files)
         if os.path.exists(dest_file):
-            print('EOP Kernel Already Exists!')
+            print('\nEOP Kernel Already Exists!')
         else:
             os.system('wget %s --directory-prefix=%s' % (url + path2 + files, pck_dir))
             os.system('rm -rf %searth_LAST.bpc' % pck_dir)
