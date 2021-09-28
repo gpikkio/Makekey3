@@ -94,7 +94,7 @@ class MakeKey:
             elif self.early_start == 'y':
                 insert = self.start_early
 
-        print(f'{self.re.match(line).groups()[0]}{insert}\n')
+        #print(f'{self.re.match(line).groups()[0]}{insert}\n')
 
         if pysched == True and text in ['stafile', 'locfile']:
             return '! Not needed with pythonSCHED\n'
