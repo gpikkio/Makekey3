@@ -471,11 +471,11 @@ def getKernels(kernel_dir, satellite):
     path='spk/'
     if satellite == 'M20':
         url=url0
-        print('\n-k opion not available (yet!)\nDOWNLOAD THE PROPER KERNELS MANUALLY!!!\n')
+        print('\n-k option not available (yet!)\nDOWNLOAD THE PROPER KERNELS MANUALLY!!!\n')
         quit()
     elif satellite == 'BC_MPO':
         url=url1
-        print('\n-k otion not available (yet!)\nDOWNLOAD THE PROPER KERNELS MANUALLY!!!\n')
+        print('\n-k option not available (yet!)\nDOWNLOAD THE PROPER KERNELS MANUALLY!!!\n')
         quit()
     else:
         url = url0
