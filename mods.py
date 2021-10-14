@@ -483,6 +483,9 @@ def getKernels(kernel_dir, satellite):
 
     response = urllib.request.urlopen(f'{url}{path}').read().decode('utf-8')
     response_re = re.compile('.*(%s.*BSP)' % filename)
+    if len(response_re.findall(response)) == 0:
+        print('\n   *** WARNING: Coordinate file does not exit in NAIF repository! ***\n')
+        #exit() # UNCOMMENT IF THE PROGRAM HAS TO STOP.
     for files in response_re.findall(response):
         dest_file = f'{spk_dir}{files}'
         if os.path.exists(dest_file):
